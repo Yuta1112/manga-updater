@@ -1,12 +1,5 @@
 [
   {
-    "name": "半吊子恋人",
-    "url": "https://syosetu.today/manga/半人前の恋人-raw-free/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
     "name": "恋爱的课程",
     "url": "https://syosetu.today/manga/恋愛の授業-raw-free/",
     "site": "syosetu.today",
@@ -37,13 +30,6 @@
   {
     "name": "我的前学生二之濑小姐",
     "url": "https://syosetu.today/manga/元教え子の二ノ瀬さん-raw-free/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
-    "name": "你原来不是我的妹妹而是我的未婚妻啊！？",
-    "url": "https://syosetu.today/manga/お前妹じゃなくて許嫁だったのかよ-raw-free/",
     "site": "syosetu.today",
     "parser": "syosetu_today",
     "enabled": true
@@ -252,13 +238,6 @@
     "enabled": true
   },
   {
-    "name": "霜月同学喜欢路人角色",
-    "url": "https://syosetu.today/manga/霜月さんはモブが好き～人見知りな彼女は俺にだ/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
     "name": "花织同学转生后还是想干架",
     "url": "https://syosetu.today/manga/花織さんは転生しても喧嘩がしたい-raw-free/",
     "site": "syosetu.today",
@@ -273,36 +252,8 @@
     "enabled": true
   },
   {
-    "name": "就算这样，\"步\"还是靠了过来",
-    "url": "https://syosetu.today/manga/それでも歩は寄せてくる-raw-free/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
     "name": "高中时代傲慢的女王大人与我的同居生活意外地并不糟糕",
     "url": "https://syosetu.today/manga/高校時代に傲慢だった女王様との同棲生活は意外/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
-    "name": "毒舌傲娇冷美少女的小小傲娇也不会放过的我",
-    "url": "https://syosetu.today/manga/やたらと察しのいい俺は、毒舌クーデレ美少女の/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
-    "name": "盗墓王",
-    "url": "https://syosetu.today/manga/盗掘王-raw-free/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
-    "name": "爱与美人鱼",
-    "url": "https://syosetu.today/manga/愛と人魚姫-raw-free/",
     "site": "syosetu.today",
     "parser": "syosetu_today",
     "enabled": true
@@ -322,13 +273,6 @@
     "enabled": true
   },
   {
-    "name": "与以为是男孩子的青梅竹马的结婚生活过于顺利的这件事",
-    "url": "https://syosetu.today/manga/陰キャの俺が席替えでs級美少女に囲まれたら秘密/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
     "name": "放课后的偶像有秘密",
     "url": "https://syosetu.today/manga/放課後のアイドルには秘密がある-raw-free/",
     "site": "syosetu.today",
@@ -338,13 +282,6 @@
   {
     "name": "身为阴角的我换座位后意外被S级美少女们包围",
     "url": "https://syosetu.today/manga/陰キャの俺が席替えでs級美少女に囲まれたら秘密/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
-  {
-    "name": "和青梅竹马之间不会有恋爱喜剧",
-    "url": "https://syosetu.today/manga/幼馴染とはラブコメにならない-raw-free/",
     "site": "syosetu.today",
     "parser": "syosetu_today",
     "enabled": true
@@ -362,14 +299,7 @@
     "site": "syosetu.today",
     "parser": "syosetu_today",
     "enabled": true
-  },
-  {
-    "name": "无口的柏田小姐与元气的太田君",
-    "url": "https://syosetu.today/manga/顔に出ない柏田さんと顔に出る太田君-raw-free/",
-    "site": "syosetu.today",
-    "parser": "syosetu_today",
-    "enabled": true
-  },
+  },  
   {
     "name": "年上辣妹青梅的爱过于沉重",
     "url": "https://syosetu.today/manga/どうやら俺は今どきギャルな歳上幼馴染から激重/",
