@@ -16,10 +16,12 @@ class MangaMonitor:
         state_manager: StateManager,
         *,
         request_delay: float = 1.0,
+        persist_state: bool = True,
     ) -> None:
         self.manga_config = manga_config
         self.state_manager = state_manager
         self.request_delay = request_delay
+        self.persist_state = persist_state
         self.updates_detected: List[Dict[str, str]] = []
 
     def run_check(self) -> List[Dict[str, str]]:
@@ -83,6 +85,7 @@ class MangaMonitor:
                     manga["name"],
                     current_chapter,
                     manga["url"],
+                    save=self.persist_state,
                 )
 
                 # Small delay to be respectful to the server.

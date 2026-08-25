@@ -32,6 +32,16 @@ class TestStateManager(unittest.TestCase):
         retrieved = self.state_manager.get_latest_chapter(manga_name)
         self.assertEqual(retrieved, chapter)
     
+    def test_update_without_save_does_not_write_file(self):
+        # simulates dry-run mode: memory updated, disk untouched
+        if os.path.exists(self.temp_file.name):
+            os.unlink(self.temp_file.name)
+
+        ok = self.state_manager.update_manga("Manga", "第1話", "http://example.com", save=False)
+        self.assertTrue(ok)
+        self.assertEqual(self.state_manager.get_latest_chapter("Manga"), "第1話")
+        self.assertFalse(os.path.exists(self.temp_file.name))
+
     def test_has_updated_first_time(self):
         # Test first-time check (should not be considered an update)
         manga_name = "Test Manga"

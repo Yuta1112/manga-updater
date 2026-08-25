@@ -46,20 +46,42 @@ class StateManager:
         """Get the latest chapter recorded for a manga"""
         return self.state_data.get(manga_name, {}).get('latest_chapter')
     
-    def update_manga(self, manga_name: str, latest_chapter: str, url: str) -> bool:
-        """Update the latest chapter for a manga"""
+    def update_manga(
+        self,
+        manga_name: str,
+        latest_chapter: str,
+        url: str,
+        *,
+        save: bool = True,
+    ) -> bool:
+        """Update the latest chapter for a manga in memory.
+
+        Args:
+            manga_name: Manga key in the state file.
+            latest_chapter: Latest chapter label.
+            url: Manga page URL.
+            save: Whether to persist to disk immediately. ``False`` is useful
+                for dry-run mode so the state file is not modified.
+
+        Returns:
+            True when no persistence error occurred.
+        """
         current_time = datetime.now().isoformat()
-        
+
         if manga_name not in self.state_data:
             self.state_data[manga_name] = {}
-        
-        self.state_data[manga_name].update({
-            'latest_chapter': latest_chapter,
-            'url': url,
-            'last_checked': current_time
-        })
-        
-        return self.save_state()
+
+        self.state_data[manga_name].update(
+            {
+                "latest_chapter": latest_chapter,
+                "url": url,
+                "last_checked": current_time,
+            }
+        )
+
+        if save:
+            return self.save_state()
+        return True
     
     def has_updated(self, manga_name: str, current_chapter: str) -> tuple[bool, Optional[str]]:
         """Check if a manga has been updated since last check

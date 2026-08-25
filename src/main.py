@@ -83,7 +83,11 @@ def main():
     state_manager = StateManager(args.state)
     
     # Initialize monitor
-    monitor = MangaMonitor(enabled_manga, state_manager)
+    monitor = MangaMonitor(
+        enabled_manga,
+        state_manager,
+        persist_state=not args.dry_run,
+    )
     
     # Run manga check
     updates = monitor.run_check()
