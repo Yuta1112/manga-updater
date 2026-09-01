@@ -378,6 +378,20 @@
     "enabled": true
   },
   {
+    "name": "身为路人祭司的我发现这是乙女游戏的世界于是决定养成女主",
+    "url": "https://syosetu.date/manga/モブ司祭だけど、 この世界が乙女ゲーム だと気づ/",
+    "site": "syosetu.today",
+    "parser": "syosetu_today",
+    "enabled": true
+  },
+  {
+    "name": "主角的青梅竹马，对我这个配角来势汹汹",
+    "url": "https://syosetu.date/manga/ 主人公の幼馴染が、脇役の俺にグイグイくる-raw-free/",
+    "site": "syosetu.today",
+    "parser": "syosetu_today",
+    "enabled": true
+  },
+  {
     "name": "与孤高的她在房间里做的那些事",
     "url": "https://syosetu.today/manga/孤高なカノジョと、彼女の部屋でシてること-raw-free/",
     "site": "syosetu.today",
