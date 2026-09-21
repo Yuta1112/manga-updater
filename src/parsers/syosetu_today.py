@@ -1,4 +1,4 @@
-"""Parser for https://syosetu.today/ manga detail pages.
+"""Parser for https://syosetu.bio/ manga detail pages (formerly syosetu.today).
 
 The page lists chapters in the "Chapters" section. Each chapter link is inside:
 
@@ -27,7 +27,7 @@ SLUG_PATTERN = re.compile(r"chapter[_-](\d+(?:[._-]\d+)?)", re.IGNORECASE)
 
 
 class SyosetuTodayParser(BaseParser):
-    """Parses a syosetu.today manga detail page."""
+    """Parses a syosetu.bio manga detail page."""
 
     def get_latest_chapter(self) -> Optional[dict[str, str]]:
         html = fetch_html(self.url)

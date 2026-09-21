@@ -28,7 +28,7 @@ manga-updater/
 │   ├── fetcher.py                       # 带超时/重试的请求
 │   └── parsers/
 │       ├── base.py                      # 解析器基类
-│       ├── syosetu_today.py             # syosetu.today 解析器
+│       ├── syosetu_today.py             # syosetu.bio（原 syosetu.today）解析器
 │       └── default_parser.py            # 通用默认解析器
 ├── tests/                               # 单元测试
 └── requirements.txt
@@ -73,8 +73,8 @@ python -m src.main
 [
   {
     "name": "漫画名称",
-    "url": "https://syosetu.today/manga/xxx-raw-free/",
-    "site": "syosetu.today",
+    "url": "https://syosetu.bio/manga/xxx-raw-free/",
+    "site": "syosetu.bio",
     "parser": "syosetu_today",
     "enabled": true
   }
@@ -91,7 +91,7 @@ python -m src.main
 | `parser` | 解析器名称，`syosetu_today` 已内置 |
 | `enabled` | `true` 参与检查，`false` 跳过 |
 
-> 本项目当前已配置了 `syosetu.today` 的解析器。如果要添加其他网站，请参考下面“添加新网站 parser 的方法”。
+> 本项目当前已配置了 `syosetu.bio`（原 `syosetu.today`）的解析器。如果要添加其他网站，请参考下面“添加新网站 parser 的方法”。
 
 ## PushPlus 配置
 
@@ -136,7 +136,7 @@ python -m src.main
 {
   "漫画A": {
     "latest_chapter": "第120話",
-    "url": "https://syosetu.today/manga/xxx-raw-free/",
+    "url": "https://syosetu.bio/manga/xxx-raw-free/",
     "last_checked": "2026-08-26T12:00:00+00:00"
   }
 }
@@ -189,7 +189,7 @@ python -m unittest discover -s tests -v
 
 - 章节比较（第9话 < 第10话、第01话=第1话、小数话、无法比较）
 - 状态管理（首次运行、无更新、新话）
-- 解析器（syosetu.today 页面结构、无章节时）
+- 解析器（syosetu.bio 页面结构、无章节时）
 - 请求重试（超时、5xx、永久 404）
 - 监控容错（一部失败不影响其他）
 - PushPlus（Token 缺失、合并通知、测试消息）

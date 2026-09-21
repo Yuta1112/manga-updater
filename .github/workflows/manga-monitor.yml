@@ -16,16 +16,16 @@ permissions:
 
 jobs:
   monitor:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
@@ -53,4 +53,3 @@ jobs:
         else
           echo "No changes to state file"
         fi
-      continue-on-error: true

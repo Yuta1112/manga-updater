@@ -15,7 +15,7 @@
 
 ## 当前配置
 
-- `config/manga.json` 已配置 54 部漫画，全部来自 `syosetu.today`
+- `config/manga.json` 当前 57 条配置（51 条启用），漫画页面来自 `syosetu.bio`（原 `syosetu.today` 已于 2026-09 迁移域名，详见 git log / 修复说明）
 - `data/state.json` 保存运行状态，由 GitHub Actions 自动提交
 - `.github/workflows/manga-monitor.yml` 每 6 小时运行一次，支持手动触发
 
