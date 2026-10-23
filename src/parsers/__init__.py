@@ -10,11 +10,19 @@ from typing import Type
 
 from .base import BaseParser
 from .default_parser import DefaultParser
+from .ganma import GanmaParser
+from .jump_plus import JumpPlusParser
+from .manga_up import MangaUpParser
+from .mangadex import MangaDexParser
 from .syosetu_today import SyosetuTodayParser
 
 PARSER_REGISTRY: dict[str, Type[BaseParser]] = {
     "default": DefaultParser,
     "syosetu_today": SyosetuTodayParser,
+    "ganma": GanmaParser,
+    "manga_up": MangaUpParser,
+    "jump_plus": JumpPlusParser,
+    "mangadex": MangaDexParser,
 }
 
 
@@ -31,6 +39,10 @@ def get_parser(parser_name: str, name: str, url: str) -> BaseParser:
 __all__ = [
     "BaseParser",
     "DefaultParser",
+    "GanmaParser",
+    "JumpPlusParser",
+    "MangaUpParser",
+    "MangaDexParser",
     "SyosetuTodayParser",
     "PARSER_REGISTRY",
     "get_parser",

@@ -7,7 +7,7 @@ rate limits, login walls, Cloudflare challenges, or CAPTCHA protections.
 from __future__ import annotations
 
 import time
-from typing import Optional
+from typing import Any, Optional
 
 import requests
 
@@ -45,11 +45,15 @@ def fetch_html(
     retries: int = DEFAULT_RETRIES,
     backoff: float = DEFAULT_BACKOFF_SECONDS,
     headers: Optional[dict[str, str]] = None,
+    encoding: Optional[str] = None,
 ) -> str:
     """Fetch a URL and return its text content.
 
     Raises FetchError after bounded retries. Permanent HTTP errors such as 403,
     404, and 405 are raised immediately because retrying would be pointless.
+
+    Pass ``encoding`` when the response declares no charset (some XML feeds do
+    not) and charset sniffing would otherwise guess wrong.
     """
     request_headers = {
         "User-Agent": USER_AGENT,
@@ -63,7 +67,7 @@ def fetch_html(
         try:
             response = requests.get(url, headers=request_headers, timeout=timeout)
             if response.status_code == 200:
-                response.encoding = response.apparent_encoding or response.encoding
+                response.encoding = encoding or response.apparent_encoding or response.encoding
                 return response.text
 
             if not _should_retry(response.status_code):
@@ -73,6 +77,59 @@ def fetch_html(
                 )
 
             # Transient HTTP error: keep the error and retry.
+            last_error = FetchError(
+                f"HTTP {response.status_code} for {url}",
+                status_code=response.status_code,
+            )
+        except requests.Timeout as exc:
+            last_error = FetchError(f"Timeout for {url}: {exc}")
+        except requests.RequestException as exc:
+            last_error = FetchError(f"Request failed for {url}: {exc}")
+
+        if attempt < retries:
+            time.sleep(backoff * attempt)
+
+    assert last_error is not None
+    raise last_error
+
+
+def fetch_json(
+    url: str,
+    *,
+    timeout: int = DEFAULT_TIMEOUT,
+    retries: int = DEFAULT_RETRIES,
+    backoff: float = DEFAULT_BACKOFF_SECONDS,
+    headers: Optional[dict[str, str]] = None,
+) -> Any:
+    """Fetch a URL and decode it as JSON.
+
+    Same retry policy as :func:`fetch_html`. The body is decoded by
+    ``requests`` rather than by ``apparent_encoding`` so UTF-8 JSON payloads
+    are not mangled by charset sniffing.
+    """
+    request_headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/json",
+    }
+    if headers:
+        request_headers.update(headers)
+
+    last_error: Optional[Exception] = None
+    for attempt in range(1, retries + 1):
+        try:
+            response = requests.get(url, headers=request_headers, timeout=timeout)
+            if response.status_code == 200:
+                try:
+                    return response.json()
+                except ValueError as exc:
+                    raise FetchError(f"Invalid JSON from {url}: {exc}") from exc
+
+            if not _should_retry(response.status_code):
+                raise FetchError(
+                    f"HTTP {response.status_code} for {url}",
+                    status_code=response.status_code,
+                )
+
             last_error = FetchError(
                 f"HTTP {response.status_code} for {url}",
                 status_code=response.status_code,

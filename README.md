@@ -28,8 +28,12 @@ manga-updater/
 │   ├── fetcher.py                       # 带超时/重试的请求
 │   └── parsers/
 │       ├── base.py                      # 解析器基类
-│       ├── syosetu_today.py             # syosetu.bio（原 syosetu.today）解析器
-│       └── default_parser.py            # 通用默认解析器
+│       ├── syosetu_today.py             # syosetu.help（原 bio/today/cheap）解析器
+│       ├── ganma.py                     # ganma.jp 解析器
+│       ├── manga_up.py                  # manga-up.com 解析器
+│       ├── jump_plus.py                 # 少年ジャンプ＋ 解析器（走官方 RSS）
+│       ├── mangadex.py                  # mangadex.org 解析器（走官方 API）
+│       └── default_parser.py            # 通用兜底解析器
 ├── tests/                               # 单元测试
 └── requirements.txt
 ```
@@ -73,8 +77,8 @@ python -m src.main
 [
   {
     "name": "漫画名称",
-    "url": "https://syosetu.bio/manga/xxx-raw-free/",
-    "site": "syosetu.bio",
+    "url": "https://syosetu.help/manga/xxx-raw-free/",
+    "site": "syosetu.help",
     "parser": "syosetu_today",
     "enabled": true
   }
@@ -88,10 +92,21 @@ python -m src.main
 | `name` | 显示名称，用于通知消息 |
 | `url` | 漫画主页网址 |
 | `site` | 网站标识 |
-| `parser` | 解析器名称，`syosetu_today` 已内置 |
+| `parser` | 解析器名称，见下表 |
 | `enabled` | `true` 参与检查，`false` 跳过 |
 
-> 本项目当前已配置了 `syosetu.bio`（原 `syosetu.today`）的解析器。如果要添加其他网站，请参考下面“添加新网站 parser 的方法”。
+内置解析器：
+
+| `parser` | 适用站点 | 说明 |
+| --- | --- | --- |
+| `syosetu_today` | `syosetu.help`（`bio` / `today` / `cheap` 均已 301 到 `help`） | 解析 `.chapter-box .entry h4 a` |
+| `ganma` | `ganma.jp` | 网页版只放出免费话，App 独家话数无法抓取 |
+| `manga_up` | `manga-up.com` | 解析页面内嵌 JSON 的 `chapters` 数组 |
+| `jump_plus` | `shonenjumpplus.com` | 从页面发现官方 RSS `/rss/series/{id}`，无需渲染 |
+| `mangadex` | `mangadex.org` | 走官方 API `/manga/{uuid}/feed`，页面本身是空壳 |
+| `default` | 其它任意站点 | 兜底启发式，按选择器阶梯取最大章节号，可靠性一般 |
+
+> 未知的 `parser` 名称会自动回退到 `default`。要接入新网站，请参考下面“添加新网站 parser 的方法”。
 
 ## PushPlus 配置
 
@@ -136,7 +151,7 @@ python -m src.main
 {
   "漫画A": {
     "latest_chapter": "第120話",
-    "url": "https://syosetu.bio/manga/xxx-raw-free/",
+    "url": "https://syosetu.help/manga/xxx-raw-free/",
     "last_checked": "2026-08-26T12:00:00+00:00"
   }
 }

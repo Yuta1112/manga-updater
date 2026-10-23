@@ -11,11 +11,11 @@
 - `src/chapter.py` — 可靠章节比较
 - `src/notifier.py` — PushPlus 通知
 - `src/fetcher.py` — 超时/有限重试请求
-- `src/parsers/` — 站点解析器（已内置 `syosetu_today`）
+- `src/parsers/` — 站点解析器：`syosetu_today`、`ganma`、`manga_up`、`jump_plus`、`mangadex`，另有 `default` 兜底
 
 ## 当前配置
 
-- `config/manga.json` 当前 57 条配置（51 条启用），漫画页面来自 `syosetu.bio`（原 `syosetu.today` 已于 2026-09 迁移域名，详见 git log / 修复说明）
+- `config/manga.json` 当前 110 条配置（全部启用），覆盖 8 个站点：101 条 `syosetu.help`（`bio` / `today` / `cheap` 均已 301 到 `help`）+ 9 条其它站点
 - `data/state.json` 保存运行状态，由 GitHub Actions 自动提交
 - `.github/workflows/manga-monitor.yml` 每 6 小时运行一次，支持手动触发
 
@@ -34,4 +34,4 @@
 python -m unittest discover -s tests -v
 ```
 
-当前 26 个测试全部通过。
+当前 41 个测试全部通过。
